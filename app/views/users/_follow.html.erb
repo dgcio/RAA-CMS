@@ -1,0 +1,16 @@
+<div class="accordion" id="accordion2">
+<% @following.each do |m| %>
+  
+    <div class="accordion-group">
+      <div class="accordion-heading">        
+        asap
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse_f<%= m %>">
+        </a>
+      </div>
+      <div id="collapse_f<%= m %>" class="accordion-body collapse">
+        <div class="accordion-inner">
+        </div>
+      </div>
+    </div>
+  <% end -%>
+</div>

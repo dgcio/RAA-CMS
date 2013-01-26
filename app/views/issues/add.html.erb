@@ -1,0 +1,34 @@
+<% return show_msg "Please #{ link_to :Login, users_login_path } to continue.", "warning" if auth_required %>
+<legend>Create Issue</legend>
+
+	<% if @issues.errors.any? %>
+		<ul class="span4 pull-right">
+			<% @issues.errors.full_messages.each do |e| %>
+				<%= content_tag :li, e %>
+			<% end -%>
+		</ul>
+	<% end -%>
+
+<%= form_for @issues, :url => issues_create_url, :html => { :class => "form-horizontal pull-left" } do |f| %>
+
+	<div class="control-group">
+		<div class="control-label">Title</div>
+		<div class="controls">
+			<%= f.text_field :title, :value => "Lorem ipsum dolor sit amet, consectetur adipiscing elit." %>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<div class="control-label">Issue Info</div>
+		<div class="controls">
+			<%= f.text_area :body, :class => "info-box", :value => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." %>
+		</div>
+	</div>
+
+	<div class="control-group">
+		<div class="controls">
+			<%= f.button :Create, :class => "btn", "data-loading-text" => "Loading..." %>
+		</div>
+	</div>
+
+<% end -%>

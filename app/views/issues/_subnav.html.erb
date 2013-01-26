@@ -1,0 +1,8 @@
+	<ul class="nav nav-pills">
+		<li class="meta-nav"><%= link_to "Create Issue", issues_add_path %></li>
+		<li class="pull-right">
+			<%= form_for :search, :html => { :class => "navbar-search" } do |f| %> 
+				<%= f.text_field :search, :placeholder => "Search..." %>
+			<% end -%>
+		</li>
+	</ul>

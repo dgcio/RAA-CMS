@@ -1,0 +1,12 @@
+<div class="container">
+	<% return show_msg "Profile does not exist for ID ##{params[:id]}", "error" if is_invalid_user %>
+	<legend><%= @users.email %></legend>
+
+
+	<h3>Movements I've started...</h3>
+	<%= render 'movements/movements' %>
+
+	<h3>Issues I've raised...</h3>
+	<%= render 'issues/issues' %>
+
+</div>

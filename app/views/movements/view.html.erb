@@ -1,0 +1,5 @@
+<% return show_msg "Please #{ link_to :Login, users_login_path } to continue.", "warning" if auth_required %>
+<h3><%= @movements.title %></h3>
+<p class="well-small">
+	<%= @movements.body %>
+</p>

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  id: 1
+  email: MyString
+  zipcode: 1
+  hashed_pwd: MyText
+  admin: false
+
+two:
+  id: 1
+  email: MyString
+  zipcode: 1
+  hashed_pwd: MyText
+  admin: false

@@ -1,0 +1,43 @@
+	<% if @users.errors.any?	%>
+		<%= content_tag :ul, :class => "pull-left well-small" do %>
+			<% @users.errors.full_messages.each do |e| %>
+				<%= content_tag :li, e %>
+			<% end -%>
+		<% end -%>
+	<% end -%>
+
+<%= form_for @users, :url => users_create_path, :html => { :class => "span5 form-horizontal well-small" } do |f|  %>
+
+ <div class="control-group">
+ 	<label class="control-label" for="users_email">Email</label>
+ 	<div class="controls">
+ 		<input id="user_email" name="user[email]" placeholder="Email" size="30" type="text">
+ 	</div>
+ </div>
+ <div class="control-group">
+ 	<label class="control-label" for="users_password">Password</label>
+ 	<div class="controls">
+ 		<input id="user_password" name="user[password]" placeholder="Password" size="30" type="password">
+ 	</div>
+ </div>
+
+  <div class="control-group">
+ 	<label class="control-label" for="users_password_confirmation">Confirm Password</label>
+ 	<div class="controls">
+ 		<input id="user_password_confirmation" name="user[password_confirmation]" placeholder="Confirm Password..." size="30" type="password">
+ 	</div>
+ </div>
+
+  <div class="control-group">
+ 	<label class="control-label" for="users_password">Zipcode</label>
+ 	<div class="controls">
+ 		<input id="user_zipcode" name="user[zipcode]" placeholder="Zipcode" size="30" type="text">
+ 	</div>
+ </div>
+
+  <div class="control-group">
+ 	<div class="controls">
+ 		<input class="btn" id="users_submit" value="Register" type="submit">
+ 	</div>
+ </div>
+<% end -%>

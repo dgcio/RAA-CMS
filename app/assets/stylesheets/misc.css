@@ -1,0 +1,19 @@
+.clear-header {
+	margin-top: 20px;
+}
+.meta-nav {
+	font-weight: 700;
+	background-color: #E7E7E7;
+	-webkit-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2) ,  -1px -1px 0 rgba(0, 0, 0, 0.1);
+  -moz-box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2) ,  -1px -1px 0 rgba(0, 0, 0, 0.1);
+  box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2) ,  -1px -1px 0 rgba(0, 0, 0, 0.1);
+}
+
+.info-box {
+	width: 375px; 
+	height: 175px;
+}
+
+.collapse-nav {
+	margin: 10px 15px 0px 0px;
+}

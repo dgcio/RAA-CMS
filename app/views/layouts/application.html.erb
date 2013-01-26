@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Raa</title>
+  <%= stylesheet_link_tag    "application", :media => "all" %>
+  <%= javascript_include_tag "//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js", "application" %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+<div class="container-fixed navbar-inner">
+	<div class="container navbar navbar-static-top">	
+			<div class="brand"><%= link_to "RAA", root_path %></div>
+			<% if is_logged_in? %>
+				<ul class="nav pull-right"><li><%= link_to "Logout", users_logout_path %></li>
+			<% else %>
+				<ul class="nav pull-right">
+					<li><%= link_to "Login", users_login_path %></li>
+					<li><%= link_to "Register", users_register_path %></li>
+				</ul>
+			<% end -%>
+	</div>
+</div>
+
+	<div class="container-fixed subnav">
+		<div class="container">
+			<% if is_logged_in? %>
+			<ul class="nav nav-pills navbar-static-top">
+				<li><%= link_to "Issues", issues_path %></li>
+				<li><%= link_to "Movements", movements_path %></li>
+				<li class="pull-right">
+					<%= link_to session[:user][:email], users_profile_path(session[:user][:id]) %>
+				</li>
+			</ul>
+		 <% end -%>	
+		</div>
+	</div>
+
+<div class="container clear-header">
+	<%= yield %>
+</div>
+
+</body>
+</html>

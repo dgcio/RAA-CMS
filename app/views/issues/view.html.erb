@@ -1,0 +1,3 @@
+<% return show_msg "Please #{ link_to :Login, users_login_path } to continue.", "warning" if auth_required %>
+<h3><%= @issues.title %></h3>
+<p><%= @issues.body %></p>
