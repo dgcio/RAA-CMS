@@ -40,5 +40,12 @@
 	<%= yield %>
 </div>
 
+<div class="container">
+	<div class="footer navbar-static-bottom top-footer-border">
+		<h6 class="pull-left">Copyright <%= Time.now.year %> &copy; RAA</h6>
+		<h6 class="pull-right"><%= link_to "about", public_about_path %></h6>
+	</div>
+</div>
+
 </body>
 </html>

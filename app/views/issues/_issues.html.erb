@@ -1,15 +1,14 @@
-<div class="accordion" id="accordion2">
+<div class="accordion" id="accordion3">
   <% @issues.each do |m| %>
     <div class="accordion-group">
       <div class="accordion-heading">        
         <%= link_to "<div class=\"icon-info-sign collapse-nav\"></div>".html_safe, issues_view_path(m.id), 
           :class => "pull-right" %>
-        <%= link_to "<div class=\"icon-remove collapse-nav\"></div>".html_safe, issues_path, :class => "pull-right" %>
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse<%= m.id %>">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapse_i<%= m.id %>">
           <%= m.title %>
         </a>
       </div>
-      <div id="collapse<%= m.id %>" class="accordion-body collapse">
+      <div id="collapse_i<%= m.id %>" class="accordion-body collapse">
         <div class="accordion-inner">
           <%= m.body %>
         </div>

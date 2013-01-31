@@ -1,3 +1,23 @@
 <% return show_msg "Please #{ link_to :Login, users_login_path } to continue.", "warning" if auth_required %>
-<h1>Issues#edit</h1>
-<p>Find me in app/views/issues/edit.html.erb</p>
+
+<legend>Edit Issue</legend>
+
+<%= form_for :issues, :url => issues_update_path(params[:id]), :html => { :class => "form-horizontal" } do |f| %>
+	<div class="control-group">
+		<div class="control-label">Title</div>
+		<div class="controls">
+			<%= f.text_field :title, :value => @issues.title %>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="control-label">Body</div>
+		<div class="controls">
+			<%= f.text_area :body, :class => "info-box", :value => @issues.body %>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<%= f.submit :Edit, :class => "btn"%>
+		</div>
+	</div>
+<% end -%>

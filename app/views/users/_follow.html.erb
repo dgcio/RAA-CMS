@@ -1,14 +1,33 @@
-<div class="accordion" id="accordion2">
-<% @following.each do |m| %>
-  
+<div class="accordion" id="accordion4">
+  <% @follow_movement.each do |t| %>
     <div class="accordion-group">
       <div class="accordion-heading">        
-        asap
-        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse_f<%= m %>">
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion4" href="#collapse_fm<%= t.id %>">
+          <%= t.title %>
         </a>
       </div>
-      <div id="collapse_f<%= m %>" class="accordion-body collapse">
+      <div id="collapse_fm<%= t.id %>" class="accordion-body collapse">
         <div class="accordion-inner">
+          <%= t.body %>
+        </div>
+      </div>
+    </div>
+  <% end -%>
+</div>
+
+<h3>Issues Im Following...</h3>
+
+<div class="accordion" id="accordion3">
+  <% @follow_issue.each do |t| %>
+    <div class="accordion-group">
+      <div class="accordion-heading">        
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapse_fi<%= t.id %>">
+          <%= t.title %>
+        </a>
+      </div>
+      <div id="collapse_fi<%= t.id %>" class="accordion-body collapse">
+        <div class="accordion-inner">
+          <%= t.body %>
         </div>
       </div>
     </div>

@@ -1,6 +1,8 @@
 class Movement < ActiveRecord::Base
-	belongs_to :followings
 	has_many :issues
+	belongs_to :followings
+	belongs_to :users
+
   attr_accessible :body, :id, :title, :user_id
 
   validates_presence_of :title, :body

@@ -1,5 +1,7 @@
 Raa::Application.routes.draw do
-  
+
+  get "public/about"
+
   post ":id/follow_issue" => "followings#follow_issue", :as => "follow_issue"
 
   post ":id/follow_movement" => "followings#follow_movement", :as => "follow_movement"
@@ -10,9 +12,11 @@ Raa::Application.routes.draw do
 
   post "movements/create"
 
-  get "movements/edit"
+  post "movements/:id/update" => "movements#update", :as => "movements_update"
 
-  get "movements/delete"
+  get "movements/:id/edit" => "movements#edit", :as => "movements_edit"
+
+  match "movements/:id/delete" => "movements#delete", :as => "movements_delete"
 
   get "movements/:id/view" => "movements#view", :as => "movements_view"
 
@@ -24,7 +28,9 @@ Raa::Application.routes.draw do
 
   post "issues/create"
 
-  get "issues/edit"
+  post "issues/:id/update" => "issues#update", :as => "issues_update"
+
+  get "issues/:id/edit" => "issues#edit", :as => "issues_edit"
 
   get "issues/delete"
 
@@ -49,6 +55,22 @@ Raa::Application.routes.draw do
   post "users/delete"
 
   get "users/logout"
+
+  #comments
+
+  match "comments" => "comments#index", :via => "get"
+
+  post "comments/create"
+
+  post "comments/:id/update" => "comments#update", :as => "comments_update"
+
+  get "comments/:id/edit" => "comments#edit", :as => "comments_edit"
+
+  get "comments/delete"
+
+  get "comments/:id/view" => "comments#view", :as => "comments_view"
+
+  get "comments/add"
 
   #root
 

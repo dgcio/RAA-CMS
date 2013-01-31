@@ -14,20 +14,20 @@
 	<div class="control-group">
 		<div class="control-label">Title</div>
 		<div class="controls">
-			<%= f.text_field :title, :value => "Lorem ipsum dolor sit amet, consectetur adipiscing elit." %>
+			<%= f.text_field :title, :placeholder => "Give your issue a title..." %>
 		</div>
 	</div>
 
 	<div class="control-group">
-		<div class="control-label">Issue Info</div>
+		<div class="control-label">Body</div>
 		<div class="controls">
-			<%= f.text_area :body, :class => "info-box", :value => "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum." %>
+			<%= f.text_area :body, :class => "info-box", :placeholder => "Explain your issue..." %>
 		</div>
 	</div>
 
 	<div class="control-group">
 		<div class="controls">
-			<%= f.button :Create, :class => "btn", "data-loading-text" => "Loading..." %>
+			<%= f.submit :Create, :class => "btn" %>
 		</div>
 	</div>
 

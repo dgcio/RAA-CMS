@@ -1,4 +1,7 @@
-<div class="container">
+	<% if flash[:notice] %>
+		<%= show_msg flash[:notice], "success" %>
+	<% end -%>
+
 	<% return show_msg "Profile does not exist for ID ##{params[:id]}", "error" if is_invalid_user %>
 	<legend><%= @users.email %></legend>
 
@@ -8,5 +11,3 @@
 
 	<h3>Issues I've raised...</h3>
 	<%= render 'issues/issues' %>
-
-</div>

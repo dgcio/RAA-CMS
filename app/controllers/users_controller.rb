@@ -4,9 +4,10 @@ class UsersController < ApplicationController
 
   def profile
     @users = User.find_by_id(params[:id])
-    @movements = Movement.find_all_by_user_id(session[:user][:id])
-    @issues = Issue.find_all_by_user_id(session[:user][:id])
-    @following = Following.find_all_by_user_id(session[:user][:id]).map(&:id)
+    @movements = @users.movements.all
+    @issues = @users.issues.all
+    @follow_issue = User.issue_followings(params[:id])
+    @follow_movement = User.movement_followings(params[:id])
   end
 
   def register
@@ -22,6 +23,7 @@ class UsersController < ApplicationController
       if @users
         session[:user] = @users
         redirect_to users_profile_path(@users.id)
+        flash[:notice] = "Succesfully Logged in."
       else
         redirect_to users_login_path
         flash[:notice] = "Email/Password incorrect. Please try again."
@@ -33,7 +35,8 @@ class UsersController < ApplicationController
     @users = User.new(params[:user])
 
     if @users.save
-      redirect_to users_path
+      redirect_to users_login_path
+      flash[:notice] = "Succesfully created account #{@users.email}, you can now login."
     else
       render :action => 'register'
     end
@@ -43,6 +46,7 @@ class UsersController < ApplicationController
     return nil if session[:user].blank?
     session[:user] = nil
     redirect_to root_path
+    flash[:notice] = "Succesfully logged out."
   end
 
   def delete

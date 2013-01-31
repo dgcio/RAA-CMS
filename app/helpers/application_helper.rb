@@ -11,4 +11,8 @@ module ApplicationHelper
 	def show_msg(msg, type)
 		return content_tag :div, msg.html_safe, :class => "alert alert-#{type}"
 	end
+
+	def admin_of_post?(id)
+		return session[:user][:id] == id
+	end
 end

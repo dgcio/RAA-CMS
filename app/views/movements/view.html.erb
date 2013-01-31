@@ -1,5 +1,22 @@
 <% return show_msg "Please #{ link_to :Login, users_login_path } to continue.", "warning" if auth_required %>
+
+<% if admin_of_post?(@movements.user_id) %>
+	<%= link_to :Edit, movements_edit_path(params[:id]), :class => "pull-right btn" %>
+  <%= link_to :Delete, movements_delete_path(params[:id]), :class => "pull-right btn"%>
+<% end -%>
+
 <h3><%= @movements.title %></h3>
 <p class="well-small">
 	<%= @movements.body %>
 </p>
+<p class="pull-right muted">Created by <%= @users[0][:email] %></p>
+
+<br><h4 class="page-header">What do you think about this Movement?</h4>
+<%= render 'comments/new_comment' %>
+
+<% @show_comments.each do |c| %>
+	
+	<h4 class="page-header"><%= c.author %></h4>
+	<p class="clearfix"><%= c.body %></p>
+
+<% end -%>

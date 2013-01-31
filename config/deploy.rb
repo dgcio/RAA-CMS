@@ -13,7 +13,7 @@ set :deploy_via, :copy
 set :deploy_to, "/raa"
 set :keep_releases, 3
 
-after "deploy:restart", "deploy:cleanup"
+after "deploy:restart", "deploy:cleanup" 
 
  namespace :deploy do
    task :start do ; end
