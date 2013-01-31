@@ -3,6 +3,7 @@ class Issue < ActiveRecord::Base
   belongs_to :movements
   belongs_to :users
   belongs_to :followings
+  has_many :comments
 
   validates_presence_of :title, :body
   validates_length_of :title, :within => 10...140

@@ -15,8 +15,14 @@
 <%= render 'comments/new_comment' %>
 
 <% @show_comments.each do |c| %>
-	
+<div class="span6">
 	<h4 class="page-header"><%= c.author %></h4>
+	<% if admin_of_comment?(c.user_id) %>
+	<div class="pull-right">
+		<%= link_to "", comments_delete_path(c.id), :class => "icon-remove" %>
+		<%= link_to "", comments_edit_path(c.id), :class => "icon-edit" %>
+	</div>
+	<% end -%>
 	<p class="clearfix"><%= c.body %></p>
-
+</div>
 <% end -%>

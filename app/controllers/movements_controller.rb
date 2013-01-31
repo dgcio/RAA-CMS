@@ -42,7 +42,7 @@ class MovementsController < ApplicationController
     @movements = Movement.find_by_id(params[:id]).destroy
     if @movements
       redirect_to movements_path
-      flash[:notice] = "Movement #{params[:id]} succesfully deleted."
+      flash[:notice] = "Movement ##{params[:id]} succesfully deleted."
     end
   end
 

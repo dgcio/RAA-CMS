@@ -15,4 +15,8 @@ module ApplicationHelper
 	def admin_of_post?(id)
 		return session[:user][:id] == id
 	end
+
+	def admin_of_comment?(id)
+		return session[:user][:id] == id
+	end
 end

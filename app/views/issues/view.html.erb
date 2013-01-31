@@ -2,7 +2,7 @@
 
 <% if admin_of_post?(@issues.user_id) %>
 	<%= link_to :Edit, issues_edit_path(params[:id]), :class => "pull-right btn" %>
-  <%= link_to :Delete, movements_delete_path(params[:id]), :class => "pull-right btn"%>
+  <%= link_to :Delete, issues_delete_path(params[:id]), :class => "pull-right btn"%>
 <% end -%>
 
 <h3><%= @issues.title %></h3>
@@ -13,8 +13,14 @@
 <%= render 'comments/new_comment' %>
 
 <% @show_comments.each do |c| %>
-	
-	<h4 class="pull-left"><%= c.author %></h4>
-	<p class="pull-right"><%= c.body %></p>
-
+<div class="span6">
+	<h4 class="page-header"><%= c.author %></h4>
+	<% if admin_of_comment?(c.user_id) %>
+	<div class="pull-right">
+		<%= link_to "", comments_delete_path(c.id), :class => "icon-remove" %>
+		<%= link_to "", comments_edit_path(c.id), :class => "icon-edit" %>
+	</div>
+	<% end -%>
+	<p class="clearfix"><%= c.body %></p>
+</div>
 <% end -%>

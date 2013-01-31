@@ -4,6 +4,7 @@ class UsersController < ApplicationController
 
   def profile
     @users = User.find_by_id(params[:id])
+    @comments = @users.comments.all :limit => 5
     @movements = @users.movements.all
     @issues = @users.issues.all
     @follow_issue = User.issue_followings(params[:id])

@@ -2,6 +2,7 @@ class Movement < ActiveRecord::Base
 	has_many :issues
 	belongs_to :followings
 	belongs_to :users
+	has_many :comments
 
   attr_accessible :body, :id, :title, :user_id
 

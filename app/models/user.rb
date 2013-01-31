@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :issues
   has_many :movements
   has_many :followings
+  has_many :comments
 
 	attr_accessor :password, :password_confirmation
   attr_accessible :password, :password_confirmation, :admin, :email, :hashed_pwd, :id, :zipcode

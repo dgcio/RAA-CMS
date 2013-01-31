@@ -1,5 +1,6 @@
 class CommentsController < ApplicationController
   def edit
+    @comments = Comment.find_by_id(params[:id])
   end
 
   def create
@@ -26,8 +27,20 @@ class CommentsController < ApplicationController
   end
 
   def update
+    @comments = Comment.find_by_id(params[:id])
+
+    if @comments.update_attributes(params[:comments])
+      redirect_to users_profile_path(session[:user][:id])
+      flash[:notice] = "Comment succesfully edited."
+    else
+      render :action => "edit"
+    end
   end
 
   def delete
+    @comments = Comment.find_by_id(params[:id]).destroy
+    if @comments
+      redirect_to request.referer
+    end
   end
 end

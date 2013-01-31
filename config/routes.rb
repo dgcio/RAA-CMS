@@ -32,7 +32,7 @@ Raa::Application.routes.draw do
 
   get "issues/:id/edit" => "issues#edit", :as => "issues_edit"
 
-  get "issues/delete"
+  match "issues/:id/delete" => "issues#delete", :as => "issues_delete"
 
   get "issues/:id/view" => "issues#view", :as => "issues_view"
 
@@ -66,7 +66,7 @@ Raa::Application.routes.draw do
 
   get "comments/:id/edit" => "comments#edit", :as => "comments_edit"
 
-  get "comments/delete"
+  match "comments/:id/delete" => "comments#delete", :as => "comments_delete"
 
   get "comments/:id/view" => "comments#view", :as => "comments_view"
 
