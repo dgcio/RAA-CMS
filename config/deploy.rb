@@ -20,8 +20,8 @@ after "deploy:restart", "deploy:cleanup"
    task :stop do ; end
    task :restart, :roles => :app, :except => { :no_release => true } do
      run "touch /tmp/restart.txt"
-     #run "cp /extra/wh/database.yml /wh/current/config/"
-     #run "cp /extra/wh/unicorn.rb /wh/current/config/"
-     #run "uni restart /etc/unicorn/wh.conf"
+     run "cp /extra/wh/database.yml /wh/current/config/"
+     run "cp /extra/wh/unicorn.rb /wh/current/config/"
+     run "uni restart /etc/unicorn/wh.conf"
    end
  end
