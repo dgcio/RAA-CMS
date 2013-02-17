@@ -35,7 +35,11 @@ class IssuesController < ApplicationController
 
   def delete
     @issues = Issue.find_by_id(params[:id]).destroy
+    @comments = Comment.find_all_by_issue_id(params[:id])
     if @issues
+      @comments.each do |c|
+        c.destroy
+      end
       redirect_to issues_path
       flash[:notice] = "issue ##{params[:id]} succesfully deleted."
     end
@@ -43,6 +47,7 @@ class IssuesController < ApplicationController
 
   def view
     @issues = Issue.find_by_id(params[:id])
+    return nil if @issues.blank?
     @users = User.joins(:issues).where(:id => @issues.user_id).limit 1
     @show_comments = @issues.comments.all
   end

@@ -1,4 +1,5 @@
 <% return show_msg "Please #{ link_to :Login, users_login_path } to continue.", "warning" if auth_required %>
+<% return show_msg "Issue doesn't exist for ID #" + params[:id], "error" if @issues.blank? %>
 
 	<%= link_to "&lsaquo;&lsaquo; Back to movement".html_safe, movements_view_path(@issues.movement_id) %>
 

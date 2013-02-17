@@ -3,13 +3,13 @@
 	<% end -%>
 
 	<% return show_msg "Profile does not exist for ID ##{params[:id]}", "error" if is_invalid_user %>
-	<legend><%= @users.email %></legend>
+	<legend>Viwing profile for <%= @users.email %></legend>
 
 
-	<h3>Movements I've started...</h3>
+	<%= content_tag :h3, "Movements Ive created" %>
 	<%= render 'movements/movements' %>
 
-	<h3>Issues I've raised...</h3>
+	<%= content_tag :h3, "Issues Ive raised" %>
 	<%= render 'issues/issues' %>
 
 	<%= content_tag :h3, "Comments I've made" %>

@@ -40,7 +40,15 @@ class MovementsController < ApplicationController
 
   def delete
     @movements = Movement.find_by_id(params[:id]).destroy
+    @issues = Issue.find_all_by_movement_id(params[:id])
     if @movements
+      @issues.each do |i|
+        i.destroy
+        @comments = Comment.find_all_by_issue_id(i.id)
+        @comments.each do |c|
+          c.destroy
+        end
+      end
       redirect_to movements_path
       flash[:notice] = "Movement ##{params[:id]} succesfully deleted."
     end
@@ -48,6 +56,7 @@ class MovementsController < ApplicationController
 
   def view
     @movements = Movement.find_by_id(params[:id])
+    return nil if @movements.blank?
     @users = User.joins(:movements).where(:id => @movements.user_id).limit 1
     @issues = @movements.issues.all
   end

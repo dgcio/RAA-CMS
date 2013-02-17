@@ -1,3 +1,7 @@
+<% if @movements.blank? %>
+   <%= content_tag :p, "You've not created any movements yet...", :class => "well-small" %>
+<% end -%>
+
 <div class="accordion" id="accordion2">
   <% @movements.each do |m| %>
     <div class="accordion-group">

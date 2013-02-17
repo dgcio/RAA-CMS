@@ -1,4 +1,5 @@
 <% return show_msg "Please #{ link_to :Login, users_login_path } to continue.", "warning" if auth_required %>
+<% return show_msg "Movement doesn't exist for ID #" + params[:id], "error" if @movements.blank? %>
 
 <% if admin_of_post?(@movements.user_id) %>
 	<%= link_to :Edit, movements_edit_path(params[:id]), :class => "pull-right btn", :style => "margin-left: 7px;" %>

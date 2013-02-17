@@ -1,3 +1,7 @@
+<% if @issues.blank? %>
+   <%= content_tag :p, "You've not raised any issues yet...", :class => "well-small" %>
+<% end -%>
+
 <div class="accordion" id="accordion3">
   <% @issues.each do |m| %>
     <div class="accordion-group">
