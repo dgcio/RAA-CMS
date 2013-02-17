@@ -4,37 +4,28 @@ class CommentsController < ApplicationController
   end
 
   def create
-    @comments = Comment.new(:user_id => session[:user][:id], :body => params[:comments][:body], :author => session[:user][:email])
-    @referer = request.referer.split "/"
-
-    if @referer[3] == "movements"
-      @comments.movement_id = @referer[4]
-      @comments.issue_id = 0
+    @comments = Comment.new(:user_id => session[:user][:id], 
+                            :issue_id => params[:issue_id], 
+                            :author => session[:user][:email], 
+                            :body => params[:comment][:body])
+    if @comments.save
+      redirect_to request.referer
+      flash[:notice] = "Comment succesfully added"
     else
-      @comments.issue_id = @referer[4]
-      @comments.movement_id = 0
-    end
-
-    if request.post?
-      if @comments.save
-        redirect_to request.referer
-        flash[:notice] = "Comment succesfully added"
-      else
-        redirect_to request.referer
-        flash[:notice] = "Something went wrong"
-      end
+      redirect_to request.referer
+      flash[:notice] = "Comment is too short. Needs to be longer than 10 characters."
     end
   end
 
   def update
     @comments = Comment.find_by_id(params[:id])
 
-    if @comments.update_attributes(params[:comments])
-      redirect_to users_profile_path(session[:user][:id])
-      flash[:notice] = "Comment succesfully edited."
-    else
-      render :action => "edit"
-    end
+      if @comments.update_attributes(params[:comments])
+        redirect_to issues_view_path(@comments.issue_id)
+        flash[:notice] = "Comment succesfully edited."
+      else
+        render :action => "edit"
+      end
   end
 
   def delete

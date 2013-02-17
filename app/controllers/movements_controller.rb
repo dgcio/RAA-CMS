@@ -49,6 +49,6 @@ class MovementsController < ApplicationController
   def view
     @movements = Movement.find_by_id(params[:id])
     @users = User.joins(:movements).where(:id => @movements.user_id).limit 1
-    @show_comments = Comment.find_all_by_movement_id(params[:id])    
+    @issues = @movements.issues.all
   end
 end

@@ -3,7 +3,6 @@ require 'digest/sha2'
 class User < ActiveRecord::Base
   has_many :issues
   has_many :movements
-  has_many :followings
   has_many :comments
 
 	attr_accessor :password, :password_confirmation

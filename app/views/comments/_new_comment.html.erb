@@ -1,9 +1,0 @@
-<% if flash[:notice] %>
-	<% show_msg flash[:notice], "info" %>
-<% end -%>
-
-<%= form_for :comments, :url => comments_create_path, :html => { :class => "form-horizontal pull-right" } do |f| %>
-	<%= f.text_area :body, :style => "width: 400px; height: 130px;", :placeholder => "Enter your comment..." %>
-	<br><br>
-	<%= f.submit :Comment, :class => "btn" %>
-<% end -%>

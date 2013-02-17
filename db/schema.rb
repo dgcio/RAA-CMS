@@ -11,25 +11,24 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130131002933) do
+ActiveRecord::Schema.define(:version => 20130216212358) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "issue_id"
-    t.integer  "movement_id"
     t.text     "author"
     t.text     "body"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "followings", :force => true do |t|
-    t.integer  "issue_id"
     t.integer  "movement_id"
     t.integer  "user_id"
-    t.text     "main_type"
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
+    t.text     "title"
+    t.text     "body"
   end
 
   create_table "issues", :force => true do |t|

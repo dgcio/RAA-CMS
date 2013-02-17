@@ -1,28 +1,40 @@
 <% return show_msg "Please #{ link_to :Login, users_login_path } to continue.", "warning" if auth_required %>
 
 <% if admin_of_post?(@movements.user_id) %>
-	<%= link_to :Edit, movements_edit_path(params[:id]), :class => "pull-right btn" %>
+	<%= link_to :Edit, movements_edit_path(params[:id]), :class => "pull-right btn", :style => "margin-left: 7px;" %>
   <%= link_to :Delete, movements_delete_path(params[:id]), :class => "pull-right btn"%>
 <% end -%>
 
-<h3><%= @movements.title %></h3>
-<p class="well-small">
+<%= content_tag :h3, @movements.title %>
+<%= content_tag :p, :class => "well-small" do %>
 	<%= @movements.body %>
-</p>
-<p class="pull-right muted">Created by <%= @users[0][:email] %></p>
-
-<br><h4 class="page-header">What do you think about this Movement?</h4>
-<%= render 'comments/new_comment' %>
-
-<% @show_comments.each do |c| %>
-<div class="span6">
-	<h4 class="page-header"><%= c.author %></h4>
-	<% if admin_of_comment?(c.user_id) %>
-	<div class="pull-right">
-		<%= link_to "", comments_delete_path(c.id), :class => "icon-remove" %>
-		<%= link_to "", comments_edit_path(c.id), :class => "icon-edit" %>
-	</div>
-	<% end -%>
-	<p class="clearfix"><%= c.body %></p>
-</div>
+<% end %>
+<%= content_tag :p, :class => "muted pull-right" do %>
+	<%= "Created by " + @users.first.email %>
 <% end -%>
+
+<%= content_tag :h5, :class => "well pull-left" do %>
+	Add your say about this movement by creating an
+	<%= link_to "Issue", issues_add_path(params[:id]) %>
+<% end -%>
+
+<%= content_tag :p, nil, :class => "clearfix" %>
+
+<div class="accordion" id="accordion3">
+  <% @issues.each do |m| %>
+    <div class="accordion-group">
+      <div class="accordion-heading">        
+        <%= link_to "<div class=\"icon-info-sign collapse-nav\"></div>".html_safe, issues_view_path(m.id), 
+          :class => "pull-right" %>
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapse_i<%= m.id %>">
+          <%= m.title %>
+        </a>
+      </div>
+      <div id="collapse_i<%= m.id %>" class="accordion-body collapse">
+        <div class="accordion-inner">
+          <%= m.body %>
+        </div>
+      </div>
+    </div>
+  <% end -%>
+</div>

@@ -12,11 +12,5 @@
 	<h3>Issues I've raised...</h3>
 	<%= render 'issues/issues' %>
 
-	<h3>Comments I've made...</h3>
-	<div class="span8">
-	<% @comments.each do |c| %>
-		<h4 class="page-header">Created at: <%= c.created_at %></h4>
-	  <p class="pull-left"><%= c.body %></p>
-	  <br>
-	<% end -%>
-	</div>
+	<%= content_tag :h3, "Comments I've made" %>
+	<%= render 'comments/comment' %>

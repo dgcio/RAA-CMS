@@ -1,26 +1,33 @@
 <% return show_msg "Please #{ link_to :Login, users_login_path } to continue.", "warning" if auth_required %>
 
+	<%= link_to "&lsaquo;&lsaquo; Back to movement".html_safe, movements_view_path(@issues.movement_id) %>
+
 <% if admin_of_post?(@issues.user_id) %>
-	<%= link_to :Edit, issues_edit_path(params[:id]), :class => "pull-right btn" %>
-  <%= link_to :Delete, issues_delete_path(params[:id]), :class => "pull-right btn"%>
+	<%= link_to :Edit, issues_edit_path(params[:id]), :class => "pull-right btn", :style => "margin-left: 10px" %>
+  <%= link_to :Delete, issues_delete_path(params[:id]), :class => "pull-right btn" %>
 <% end -%>
 
-<h3><%= @issues.title %></h3>
-<p><%= @issues.body %></p>
-<p class="pull-right muted">Created by <%= @users[0][:email] %></p>
+<%= content_tag :h3, @issues.title %>
 
-<br><h4 class="page-header">What do you think about this issue?</h4>
-<%= render 'comments/new_comment' %>
+<%= content_tag :div, :class => "well" do %>
+	<%= content_tag :p, @issues.body %>
+	<%= content_tag :div, :class => "well-small comment-border muted" do %>
+		<%= content_tag :p, @issues.created_at, :class => "pull-left" %>
+		<%= content_tag :p, "Created by " + @users[0][:email], :class => "pull-right" %>
+	<% end -%>
+<% end -%>
+
+<%= render 'comments/comment_form' %>
 
 <% @show_comments.each do |c| %>
-<div class="span6">
-	<h4 class="page-header"><%= c.author %></h4>
-	<% if admin_of_comment?(c.user_id) %>
-	<div class="pull-right">
-		<%= link_to "", comments_delete_path(c.id), :class => "icon-remove" %>
-		<%= link_to "", comments_edit_path(c.id), :class => "icon-edit" %>
+	<div class="span6 clearfix">
+		<h4 class="page-header"><%= c.author %></h4>
+		<% if admin_of_comment?(c.user_id) %>
+		<div class="pull-right">
+			<%= link_to "", comments_delete_path(c.id), :class => "icon-remove" %>
+			<%= link_to "", comments_edit_path(c.id), :class => "icon-edit" %>
+		</div>
+		<% end -%>
+		<p class="clearfix"><%= c.body %></p>
 	</div>
-	<% end -%>
-	<p class="clearfix"><%= c.body %></p>
-</div>
 <% end -%>

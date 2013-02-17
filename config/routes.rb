@@ -2,9 +2,7 @@ Raa::Application.routes.draw do
 
   get "public/about"
 
-  post ":id/follow_issue" => "followings#follow_issue", :as => "follow_issue"
-
-  post ":id/follow_movement" => "followings#follow_movement", :as => "follow_movement"
+  post ":id/follow" => "followings#follow", :as => "follow"
 
   #movements
 
@@ -26,7 +24,7 @@ Raa::Application.routes.draw do
 
   match "issues" => "issues#index", :via => "get"
 
-  post "issues/create"
+  post "issues/:movement_id/create" => "issues#create", :as => "issues_create"
 
   post "issues/:id/update" => "issues#update", :as => "issues_update"
 
@@ -36,11 +34,11 @@ Raa::Application.routes.draw do
 
   get "issues/:id/view" => "issues#view", :as => "issues_view"
 
-  get "issues/add"
+  get "issues/:movement_id/add" => "issues#add", :as => "issues_add"
 
   #users
 
-  post "users/create" => "users#create"
+  post "users/register" => "users#create"
 
   post "users/login" => "users#login"
   
@@ -60,7 +58,7 @@ Raa::Application.routes.draw do
 
   match "comments" => "comments#index", :via => "get"
 
-  post "comments/create"
+  post "comments/:issue_id/create" => "comments#create", :as => "comments_create"
 
   post "comments/:id/update" => "comments#update", :as => "comments_update"
 

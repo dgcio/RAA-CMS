@@ -8,9 +8,9 @@ class IssuesController < ApplicationController
 
     if request.post?
       @issues.user_id = session[:user][:id]
-      @issues.movement_id = 0
+      @issues.movement_id = params[:movement_id]
       if @issues.save
-        redirect_to issues_path
+        redirect_to movements_view_path(params[:movement_id])
       else
         render :action => "add"
       end
@@ -44,8 +44,7 @@ class IssuesController < ApplicationController
   def view
     @issues = Issue.find_by_id(params[:id])
     @users = User.joins(:issues).where(:id => @issues.user_id).limit 1
-    @show_comments = Comment.find_all_by_issue_id(params[:id])
-    @comment_admin = Comment.where(:user_id => session[:user][:id])
+    @show_comments = @issues.comments.all
   end
 
   def add

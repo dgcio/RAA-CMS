@@ -9,7 +9,7 @@
 		</ul>
 	<% end -%>
 
-<%= form_for @issues, :url => issues_create_url, :html => { :class => "form-horizontal pull-left" } do |f| %>
+<%= form_for @issues, :url => issues_create_path(params[:movement_id]), :html => { :class => "form-horizontal pull-left" } do |f| %>
 
 	<div class="control-group">
 		<div class="control-label">Title</div>
