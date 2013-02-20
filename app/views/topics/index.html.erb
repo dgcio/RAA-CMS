@@ -1,0 +1,26 @@
+<% return show_msg "Please #{ link_to :Login, users_login_path } to continue.", "warning" if auth_required %>
+
+<% if flash[:notice] %>
+	<%= show_msg flash[:notice], "alert alert-info" %>
+<% end -%>
+
+<%= render 'subnav' %>
+
+<div class="accordion" id="accordion2">
+  <% @topics.each do |m| %>
+    <div class="accordion-group">
+      <div class="accordion-heading">
+        <%= link_to "<div class=\"icon-info-sign collapse-nav\"></div>".html_safe, topics_view_path(m.id), 
+            :class => "pull-right" %>
+        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion2" href="#collapse_m<%= m.id %>">
+          <%= m.title %>
+        </a>
+      </div>
+      <div id="collapse_m<%= m.id %>" class="accordion-body collapse">
+        <div class="accordion-inner">
+          <%= m.body %>
+        </div>
+      </div>
+    </div>
+  <% end -%>
+</div>

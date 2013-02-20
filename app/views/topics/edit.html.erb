@@ -1,0 +1,23 @@
+<% return show_msg "Please #{ link_to :Login, users_login_path } to continue.", "warning" if auth_required %>
+
+<legend>Editing "<%= @topics.title %>"</legend>
+
+<%= form_for :topics, :url => topics_update_path(params[:id]), :html => { :class => "form-horizontal" } do |f| %>
+	<div class="control-group">
+		<div class="control-label">Title</div>
+		<div class="controls">
+			<%= f.text_field :title, :value => @topics.title %>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="control-label">Body</div>
+		<div class="controls">
+			<%= f.text_area :body, :class => "info-box", :value => @topics.body %>
+		</div>
+	</div>
+	<div class="control-group">
+		<div class="controls">
+			<%= f.submit :Update, :class => "btn"%>
+		</div>
+	</div>
+<% end -%>
