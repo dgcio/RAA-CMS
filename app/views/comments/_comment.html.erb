@@ -1,9 +1,9 @@
-<% if @comments.blank? %>
+<% if @users.comments.blank? %>
    <%= content_tag :p, "You've not commented on any issues...", :class => "well-small" %>
 <% end -%>
 
 <div class="accordion" id="accordion4">
-  <% @comments.each do |m| %>
+  <% @users.comments.each do |m| %>
     <div class="accordion-group">
       <div class="accordion-heading">        
         <%= link_to "<div class=\"icon-info-sign collapse-nav\"></div>".html_safe, issues_view_path(m.issue_id), 

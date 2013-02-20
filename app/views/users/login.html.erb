@@ -1,5 +1,7 @@
 <% if flash[:notice] %>
-	<%= content_tag :div, flash[:notice], :class => "alert alert-error well-small" %>
+	<%= content_tag :div, flash[:notice] || flash[:success], :class => "alert alert-error well-small" %>
+<% elsif flash[:success] -%>
+	<%= content_tag :div, flash[:success], :class => "alert alert-success well-small" %>
 <% end -%>
 
 <%= form_for :user, :html => { :class => "span5 form-horizontal well-small" } do |f|  %>

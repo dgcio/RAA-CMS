@@ -2,7 +2,7 @@ require 'digest/sha2'
 
 class User < ActiveRecord::Base
   has_many :issues
-  has_many :movements
+  has_many :topics
   has_many :comments
 
 	attr_accessor :password, :password_confirmation
@@ -22,19 +22,8 @@ class User < ActiveRecord::Base
   def self.authenticate(email, password)
   	return nil if email && password == ''
   	u = find_by_email(email)
+    return nil if u.blank?
   	return u if u.hashed_pwd == User.hash_pwd(password)
-  end
-
-  def self.movement_followings(id)
-    u = Movement.where(:user_id => id)
-    return nil if u.nil?
-    return u
-  end
-
-  def self.issue_followings(id)
-    u = Movement.where(:user_id => id)
-    return nil if u.nil?
-    return u
   end
   	
   protected

@@ -5,9 +5,6 @@ class UsersController < ApplicationController
 
   def profile
     @users = User.find_by_id(params[:id])
-    @movements = @users.movements.all :limit => 5
-    @issues = @users.issues.all :limit => 5
-    @comments = @users.comments.all :limit => 5
   end
 
   def register
@@ -33,7 +30,8 @@ class UsersController < ApplicationController
 
     if request.post?
       if @users.save
-        redirect_to users_login_path, :notice => "Successfully created account for " + @users.email + ", you can now login."
+        redirect_to users_login_path
+        flash[:success] = "Successfully created account for " + @users.email + ", you can now login."
       else
         render :action => 'register'
       end
@@ -43,7 +41,8 @@ class UsersController < ApplicationController
   def logout
     return nil if session[:user].blank?
     session[:user] = nil
-    redirect_to root_path, :notice => "Successfully logged out."
+    redirect_to root_path
+    flash[:logout] = "Successfully logged out."
   end
 
   def delete

@@ -18,7 +18,7 @@
 	<% end -%>
 <% end -%>
 
-<%= render 'comments/comment_form' %>
+<%= render 'comments/comment_form', :partial => "issue", :object => @issues %>
 
 <% @show_comments.each do |c| %>
 	<div class="span6 clearfix">

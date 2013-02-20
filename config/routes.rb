@@ -4,21 +4,21 @@ Raa::Application.routes.draw do
 
   post ":id/follow" => "followings#follow", :as => "follow"
 
-  #movements
+  #topics
 
-  match "movements" => "movements#index", :via => "get"
+  match "topics" => "topics#index", :via => "get"
 
-  post "movements/create"
+  post "topics/create"
 
-  post "movements/:id/update" => "movements#update", :as => "movements_update"
+  post "topics/:id/update" => "topics#update", :as => "topics_update"
 
-  get "movements/:id/edit" => "movements#edit", :as => "movements_edit"
+  get "topics/:id/edit" => "topics#edit", :as => "topics_edit"
 
-  match "movements/:id/delete" => "movements#delete", :as => "movements_delete"
+  match "topics/:id/delete" => "topics#delete", :as => "topics_delete"
 
-  get "movements/:id/view" => "movements#view", :as => "movements_view"
+  get "topics/:id/view" => "topics#view", :as => "topics_view"
 
-  get "movements/add"
+  get "topics/add"
 
   #issues
 

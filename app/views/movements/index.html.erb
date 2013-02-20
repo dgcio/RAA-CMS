@@ -1,9 +1,0 @@
-<% return show_msg "Please #{ link_to :Login, users_login_path } to continue.", "warning" if auth_required %>
-
-<% if flash[:notice] %>
-	<%= show_msg flash[:notice], "alert alert-info" %>
-<% end -%>
-
-<%= render 'subnav' %>
-
-<%= render 'movements' %>

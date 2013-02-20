@@ -9,16 +9,15 @@ gem 'mysql2'
 gem 'sprockets', '~> 2.2.1'
 
 group :production do
-        gem 'unicorn'
-
-        gem 'uglifier'
-
-        gem 'execjs'
-        gem 'sass-rails'
-        gem 'coffee-rails'
+  gem 'unicorn'
+  gem 'uglifier'
+  gem 'execjs'
+  gem 'sass-rails'
+  gem 'coffee-rails'
 end
 
-group :development, :test do
-        gem 'rspec-core'
-        gem 'capistrano'
+group :development do
+  gem 'better_errors'
+  gem 'rspec-core'
+  gem 'capistrano'
 end

@@ -1,5 +1,7 @@
 	<% if flash[:notice] %>
 		<%= show_msg flash[:notice], "success" %>
+	<% elsif flash[:logout] %>
+		<%= show_msg flash[:logout], "error" %>
 	<% end -%>
 <%= image_tag "raa.png", :class => "head-image pull-right" %>
 <h3 class="page-header" style="color: #AC0000;">The Republic: Awareness and Activism</h3>

@@ -8,7 +8,7 @@ class IssuesController < ApplicationController
 
     if request.post?
       @issues.user_id = session[:user][:id]
-      @issues.movement_id = params[:movement_id]
+      @issues.topic_id = params[:movement_id]
       if @issues.save
         redirect_to movements_view_path(params[:movement_id])
       else
