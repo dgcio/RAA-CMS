@@ -3,11 +3,36 @@
 	<% end -%>
 
 	<% return show_msg "Profile does not exist for ID ##{params[:id]}", "error" if is_invalid_user %>
-	<legend>Viewing profile for <%= @users.email %></legend>
+	<legend>Viewing profile for <%= creator(:email, false) %></legend>
 
 
 	<%= content_tag :h3, "Topics Ive created" %>
 	<%= render 'topics/topics' %>
+
+	<%= content_tag :h3, "Topics I'm following" %>
+
+	<% if @topics.blank? %>
+	   <%= content_tag :p, "You're not following any topics yet...", :class => "well-small" %>
+	<% end -%>
+
+	<div class="accordion" id="accordion6">
+	  <% @topics.each do |m| %>
+	    <div class="accordion-group">
+	      <div class="accordion-heading">        
+	      	<%= link_to "<div class=\"icon-info-sign collapse-nav\"></div>".html_safe, topics_view_path(m.id), 
+            :class => "pull-right" %>
+	        <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion6" href="#collapse_c<%= m.id %>">
+	          <%= m.title %>
+	        </a>
+	      </div>
+	      <div id="collapse_c<%= m.id %>" class="accordion-body collapse">
+	        <div class="accordion-inner">
+	        	<%= m.body %>
+	        </div>
+	      </div>
+	    </div>
+	  <% end -%>
+	</div>
 
 	<%= content_tag :h3, "Issues Ive raised" %>
 	<%= render 'issues/issues' %>

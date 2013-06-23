@@ -8,9 +8,9 @@ class IssuesController < ApplicationController
 
     if request.post?
       @issues.user_id = session[:user][:id]
-      @issues.topic_id = params[:movement_id]
+      @issues.topic_id = params[:topic_id]
       if @issues.save
-        redirect_to movements_view_path(params[:movement_id])
+        redirect_to topics_view_path(params[:topic_id])
       else
         render :action => "add"
       end
@@ -18,11 +18,11 @@ class IssuesController < ApplicationController
   end
 
   def edit
-    @issues = Issue.find_by_id(params[:id])
+    @issues = Issue.find(params[:id])
   end
 
   def update
-    @issues = Issue.find_by_id(params[:id])
+    @issues = Issue.find(params[:id])
 
     if request.post?
       if @issues.update_attributes(params[:issues])
@@ -34,22 +34,22 @@ class IssuesController < ApplicationController
   end
 
   def delete
-    @issues = Issue.find_by_id(params[:id]).destroy
+    @issues = Issue.find(params[:id])
+    @topic_id = @issues.topic_id
     @comments = Comment.find_all_by_issue_id(params[:id])
-    if @issues
+    if @issues.destroy
       @comments.each do |c|
         c.destroy
       end
-      redirect_to issues_path
-      flash[:notice] = "issue ##{params[:id]} succesfully deleted."
+      redirect_to topics_view_path(@topic_id), :notice => "Issue ##{params[:id]} succesfully deleted."
     end
   end
 
   def view
-    @issues = Issue.find_by_id(params[:id])
+    @issues = Issue.find(params[:id])
     return nil if @issues.blank?
-    @users = User.joins(:issues).where(:id => @issues.user_id).limit 1
-    @show_comments = @issues.comments.all
+    @users = User.find(@issues.user_id)
+    @comments = @issues.comments.all
   end
 
   def add

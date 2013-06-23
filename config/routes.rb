@@ -24,7 +24,7 @@ Raa::Application.routes.draw do
 
   match "issues" => "issues#index", :via => "get"
 
-  post "issues/:movement_id/create" => "issues#create", :as => "issues_create"
+  post "issues/:topic_id/create" => "issues#create", :as => "issues_create"
 
   post "issues/:id/update" => "issues#update", :as => "issues_update"
 
@@ -34,7 +34,7 @@ Raa::Application.routes.draw do
 
   get "issues/:id/view" => "issues#view", :as => "issues_view"
 
-  get "issues/:movement_id/add" => "issues#add", :as => "issues_add"
+  get "issues/:topic_id/add" => "issues#add", :as => "issues_add"
 
   #users
 
@@ -69,6 +69,12 @@ Raa::Application.routes.draw do
   get "comments/:id/view" => "comments#view", :as => "comments_view"
 
   get "comments/add"
+
+  #favorites
+
+  match "favorites/:topic_id/subscribe" => "favorite#create", :as => "favorites_subscribe", :via => ["post"]
+
+  match "favorites/:topic_id/delete" => "favorite#delete", :as => "favorites_delete", :via => ["post", "get"]
 
   #root
 

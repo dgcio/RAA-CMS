@@ -4,7 +4,9 @@ class UsersController < ApplicationController
   end
 
   def profile
-    @users = User.find_by_id(params[:id])
+    @users = User.find(params[:id])
+    @favorites = Favorite.where(:user_id => @users.id).map(&:topic_id)
+    @topics = Topic.find(@favorites)
   end
 
   def register
@@ -28,21 +30,17 @@ class UsersController < ApplicationController
   def create
     @users = User.new(params[:user])
 
-    if request.post?
-      if @users.save
-        redirect_to users_login_path
-        flash[:success] = "Successfully created account for " + @users.email + ", you can now login."
-      else
-        render :action => 'register'
-      end
+    if request.post? && @users.save
+      redirect_to users_login_path, :flash =>  { :success => "Successfully created account for " + @users.email + ", you can now login." }
+    else
+      render :action => 'register'
     end
   end
 
   def logout
     return nil if session[:user].blank?
     session[:user] = nil
-    redirect_to root_path
-    flash[:logout] = "Successfully logged out."
+    redirect_to root_path, :flash => { :logout => "You've succesfully logged out." }
   end
 
   def delete

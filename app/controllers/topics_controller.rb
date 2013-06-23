@@ -8,7 +8,7 @@ class TopicsController < ApplicationController
   end
 
   def create
-    @topics = Topic.new(params[:Topic])
+    @topics = Topic.new(params[:topic])
 
     if request.post?
       @topics.user_id = session[:user][:id]
@@ -22,11 +22,11 @@ class TopicsController < ApplicationController
   end
 
   def edit
-    @topics = Topic.find_by_id(params[:id])
+    @topics = Topic.find(params[:id])
   end
 
   def update
-    @topics = Topic.find_by_id(params[:id])
+    @topics = Topic.find(params[:id])
 
     if request.post?
       if @topics.update_attributes(params[:topics])
@@ -39,12 +39,14 @@ class TopicsController < ApplicationController
   end
 
   def delete
-    @topics = Topic.find_by_id(params[:id]).destroy
-    @issues = Issue.find_all_by_Topic_id(params[:id])
-    if @topics
+    @topics = Topic.find(params[:id])
+    @favorites = Favorite.where(:topic_id => @topics.id)
+    @issues = Issue.where(:topic_id => params[:id])
+    if @topics.destroy
+      @favorites.each { |f| f.destroy }
       @issues.each do |i|
         i.destroy
-        @comments = Comment.find_all_by_issue_id(i.id)
+        @comments = Comment.where(:issue_id => i.id)
         @comments.each do |c|
           c.destroy
         end
@@ -55,8 +57,11 @@ class TopicsController < ApplicationController
   end
 
   def view
-    @topics = Topic.find_by_id(params[:id])
+    @topics = Topic.find(params[:id])
     return nil if @topics.blank?
-    @users = User.joins(:topics).where(:id => @topics.user_id).limit 1
+    @users = User.find(@topics.user_id)
+    logger.debug @users.name
+    @subscribed = Favorite.subscribed(session[:user][:id], @topics.id)
+    logger.debug @subscribed
   end
 end

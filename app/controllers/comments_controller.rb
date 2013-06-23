@@ -29,9 +29,10 @@ class CommentsController < ApplicationController
   end
 
   def delete
+    @issue_id = Comment.find(params[:id]).issue_id
     @comments = Comment.find_by_id(params[:id]).destroy
     if @comments
-      redirect_to request.referer
+      redirect_to issues_view_path(@issue_id)
     end
   end
 end

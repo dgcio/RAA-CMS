@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20130220025749) do
+ActiveRecord::Schema.define(:version => 20130608202810) do
 
   create_table "comments", :force => true do |t|
     t.integer  "user_id"
@@ -22,13 +22,11 @@ ActiveRecord::Schema.define(:version => 20130220025749) do
     t.datetime "updated_at", :null => false
   end
 
-  create_table "followings", :force => true do |t|
-    t.integer  "movement_id"
+  create_table "favorites", :force => true do |t|
     t.integer  "user_id"
-    t.datetime "created_at",  :null => false
-    t.datetime "updated_at",  :null => false
-    t.text     "title"
-    t.text     "body"
+    t.integer  "topic_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
   end
 
   create_table "issues", :force => true do |t|
@@ -38,15 +36,6 @@ ActiveRecord::Schema.define(:version => 20130220025749) do
     t.text     "body"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
-  end
-
-  create_table "movements", :force => true do |t|
-    t.integer  "user_id"
-    t.integer  "following_id"
-    t.text     "title"
-    t.text     "body"
-    t.datetime "created_at",   :null => false
-    t.datetime "updated_at",   :null => false
   end
 
   create_table "topics", :force => true do |t|
@@ -64,6 +53,7 @@ ActiveRecord::Schema.define(:version => 20130220025749) do
     t.boolean  "admin"
     t.datetime "created_at", :null => false
     t.datetime "updated_at", :null => false
+    t.string   "name"
   end
 
 end

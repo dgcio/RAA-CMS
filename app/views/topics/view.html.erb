@@ -1,32 +1,49 @@
-<% return show_msg "Please #{ link_to :Login, users_login_path } to continue.", "warning" if auth_required %>
+<% return show_msg "Please #{link_to :Login, users_login_path} to continue.", "warning" if auth_required %>
 <% return show_msg "Topic doesn't exist for ID #" + params[:id], "error" if @topics.blank? %>
+<%= show_msg flash[:subscribed], "warning" if flash[:subscribed] %>
+<%= show_msg flash[:notice], "success" if flash[:notice] %>
+
+<%= back_to "Topics Home", topics_path %>
 
 <% if admin_of_post?(@topics.user_id) %>
 	<%= link_to :Edit, topics_edit_path(params[:id]), :class => "pull-right btn", :style => "margin-left: 7px;" %>
   <%= link_to :Delete, topics_delete_path(params[:id]), :class => "pull-right btn"%>
+<% else %>
+  <% if @subscribed.blank? %>
+    <%= content_tag :div, :class => "pull-right", :style => "height: 24px;" do %>
+      <%= form_for :favorites, :url => favorites_subscribe_path(@topics.id), :class => "pull-right" do |f| %>
+        <%= content_tag :p, "", :class => "icon-plus" %>
+        <%= f.submit :Subscribe, :class => "btn-small btn-success" %>
+      <% end -%>
+    <% end -%>
+  <% else %>
+    <%= content_tag :div, :style => "float: right" do %>
+      <%= link_to "", favorites_delete_path(@topics.id), :class => "icon-remove unsubscribe_js", :style => "float: left; margin: 5px 0px" %>
+      <%= link_to :Remove, favorites_delete_path(@topics.id), :class => "pull-left btn-small remove-text hide" %>
+      <%= content_tag :p, "", :class => "icon-ok", :style => "float: left; margin: 5px 7px 5px 0px;" %>
+      <%= content_tag :div, :class => "btn-small btn-success disabled", :style => "float: right;" do %>
+        Subscribed
+      <% end -%>
+    <% end -%>
+  <% end -%>
 <% end -%>
 
-<%= content_tag :h3, @topics.title %>
-<%= content_tag :p, :class => "well-small" do %>
-	<%= @topics.body %>
-<% end %>
-<%= content_tag :p, :class => "muted pull-right" do %>
-	<%= "Created by " + @users.first.email %>
+<%= content_tag :legend, @topics.title %>
+
+<%= content_tag :p, @topics.body %>
+
+<%= content_tag :div, :class => "comment-border well-small " do %>
+  Submitted by <%= creator(:email, true) %>
+  <%= link_to "Create issue", issues_add_path(params[:id]), :class => "btn-success btn-small pull-right" %> 
 <% end -%>
 
-<%= content_tag :h5, :class => "well pull-left" do %>
-	Add your say about this topic by creating an
-	<%= link_to "Issue", issues_add_path(params[:id]) %>
-<% end -%>
+<%= content_tag :legend, "Current issues", :class=> "pull-left" %> 
 
-<%= content_tag :p, nil, :class => "clearfix" %>
-
-<div class="accordion" id="accordion3">
+<div class="accordion pull-left" id="accordion3">
   <% @topics.issues.each do |m| %>
     <div class="accordion-group">
       <div class="accordion-heading">        
-        <%= link_to "<div class=\"icon-info-sign collapse-nav\"></div>".html_safe, issues_view_path(m.id), 
-          :class => "pull-right" %>
+        <%= link_to "<div class=\"icon-info-sign collapse-nav\"></div>".html_safe, issues_view_path(m.id), :class => "pull-right" %>
         <a class="accordion-toggle" data-toggle="collapse" data-parent="#accordion3" href="#collapse_i<%= m.id %>">
           <%= m.title %>
         </a>

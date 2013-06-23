@@ -1,34 +1,38 @@
 <% return show_msg "Please #{ link_to :Login, users_login_path } to continue.", "warning" if auth_required %>
 <% return show_msg "Issue doesn't exist for ID #" + params[:id], "error" if @issues.blank? %>
 
-	<%= link_to "&lsaquo;&lsaquo; Back to movement".html_safe, movements_view_path(@issues.movement_id) %>
+<%= back_to "Topic", topics_view_path(@issues.topic_id) %>
 
 <% if admin_of_post?(@issues.user_id) %>
 	<%= link_to :Edit, issues_edit_path(params[:id]), :class => "pull-right btn", :style => "margin-left: 10px" %>
   <%= link_to :Delete, issues_delete_path(params[:id]), :class => "pull-right btn" %>
 <% end -%>
 
-<%= content_tag :h3, @issues.title %>
+<%= content_tag :legend, @issues.title %>
 
-<%= content_tag :div, :class => "well" do %>
-	<%= content_tag :p, @issues.body %>
-	<%= content_tag :div, :class => "well-small comment-border muted" do %>
-		<%= content_tag :p, @issues.created_at, :class => "pull-left" %>
-		<%= content_tag :p, "Created by " + @users[0][:email], :class => "pull-right" %>
+<%= content_tag :div do %>
+	<%= content_tag :div, :class => "well" do %>
+
+	<%= @issues.body %>
+		<%= content_tag :div, :class => "well-small muted", :style => "text-align: right;" do %>
+			Created by <%= creator(:email, true) %> on <%= @issues.created_at %>
+		<% end -%>
 	<% end -%>
 <% end -%>
 
 <%= render 'comments/comment_form', :partial => "issue", :object => @issues %>
 
-<% @show_comments.each do |c| %>
-	<div class="span6 clearfix">
-		<h4 class="page-header"><%= c.author %></h4>
-		<% if admin_of_comment?(c.user_id) %>
-		<div class="pull-right">
-			<%= link_to "", comments_delete_path(c.id), :class => "icon-remove" %>
-			<%= link_to "", comments_edit_path(c.id), :class => "icon-edit" %>
-		</div>
-		<% end -%>
+<% @comments.each do |c| %>
+	<div class="well clearfix">
+		<p class="page-header">
+			Submitted by <%= link_to c.author.capitalize, users_profile_path(c.user_id) %>
+			<% if admin_of_comment?(c.user_id) %>
+				<div class="pull-right">
+					<%= link_to "", comments_edit_path(c.id), :class => "icon-edit" %> <%= link_to :Edit, comments_edit_path(c.id) %>
+					<%= link_to "", comments_delete_path(c.id), :class => "icon-remove" %> <%= link_to :Delete, comments_delete_path(c.id) %>
+				</div>
+			<% end -%>
+		</p>
 		<p class="clearfix"><%= c.body %></p>
 	</div>
 <% end -%>

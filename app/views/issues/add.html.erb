@@ -1,4 +1,7 @@
 <% return show_msg "Please #{ link_to :Login, users_login_path } to continue.", "warning" if auth_required %>
+
+<%= back_to "viewing Topic", topics_view_path(params[:topic_id]) %>
+
 <legend>Create Issue</legend>
 
 	<% if @issues.errors.any? %>
@@ -9,7 +12,7 @@
 		</ul>
 	<% end -%>
 
-<%= form_for @issues, :url => issues_create_path(params[:movement_id]), :html => { :class => "form-horizontal pull-left" } do |f| %>
+<%= form_for @issues, :url => issues_create_path(params[:topic_id]), :html => { :class => "form-horizontal pull-left" } do |f| %>
 
 	<div class="control-group">
 		<div class="control-label">Title</div>

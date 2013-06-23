@@ -19,4 +19,8 @@ module ApplicationHelper
 	def admin_of_comment?(id)
 		return session[:user][:id] == id
 	end
+
+	def back_to(where, link)
+		return link_to "&lsaquo;&lsaquo; Back to #{where}".html_safe, link
+	end
 end

@@ -1,6 +1,6 @@
 class Topic < ActiveRecord::Base
 	belongs_to :users
-	has_many :issues
+  has_many :issues
 
   attr_accessible :body, :id, :title, :user_id
 

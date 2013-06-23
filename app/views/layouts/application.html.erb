@@ -28,7 +28,7 @@
 			<ul class="nav nav-pills navbar-static-top">
 				<li><%= link_to "Topics", topics_path %></li>
 				<li class="pull-right">
-					<%= link_to session[:user][:email], users_profile_path(session[:user][:id]) %>
+					<%= user(:email, true) %>
 				</li>
 			</ul>
 		 <% end -%>	

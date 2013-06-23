@@ -1,8 +1,5 @@
-	<ul class="nav nav-pills">
-		<li class="meta-nav"><%= link_to "Create Topic", topics_add_path %></li>
-		<li class="pull-right">
-			<%= form_for :search, :html => { :class => "navbar-search" } do |f| %> 
-				<%= f.text_field :search, :placeholder => "Search..." %>
-			<% end -%>
-		</li>
-	</ul>
+<div class="well-small clearfix">
+  <p class="pull-left icon-plus" style="margin: 5px 5px 5px 0px"></p>
+  &nbsp;<%= link_to "Create Topic", topics_add_path, :class => "pull-left btn-small btn-success" %> &nbsp;
+</div>
+
