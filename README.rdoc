@@ -1,4 +1,4 @@
-Currently hosted @ https://ga.dgc.io/
+Currently hosted @ http://ga.dgc.io/
 ==
 Current deploment frozen @ ruby 1.9.3 | Rails 3 | MySQL
 =====
