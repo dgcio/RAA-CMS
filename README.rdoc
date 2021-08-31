@@ -2,14 +2,13 @@ Currently hosted @ http://ga.dgc.io/
 
 This is a Content Managment System created for a politics topic/issue type of discussion website. 
 
-==
+<br>
 Demo User:
-==
+<br>
 Username: Demo@demo.demo
-==
+<br>
 Password: Demo123* 
 
-==
 Current deployment frozen @ ruby 1.9.3 | Rails 3 | MySQL
-=====
+
 Content Management System for Activist\Reform Website. 
